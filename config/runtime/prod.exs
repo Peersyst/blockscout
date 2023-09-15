@@ -81,6 +81,12 @@ config :explorer, Explorer.Repo.Suave,
   pool_size: 1,
   ssl: ExplorerConfigHelper.ssl_enabled?()
 
+# Configures PolygonZkevm database
+config :explorer, Explorer.Repo.PolygonZkevm,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: ConfigHelper.parse_integer_env_var("POLYGON_ZKEVM_POOL_SIZE", 50),
+  ssl: ExplorerConfigHelper.ssl_enabled?()
+
 variant = Variant.get()
 
 Code.require_file("#{variant}.exs", "apps/explorer/config/prod")

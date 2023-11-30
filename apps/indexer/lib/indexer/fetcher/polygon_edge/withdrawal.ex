@@ -12,13 +12,14 @@ defmodule Indexer.Fetcher.PolygonEdge.Withdrawal do
 
   import EthereumJSONRPC, only: [quantity_to_integer: 1]
   import Explorer.Helper, only: [decode_data: 2]
-  import Indexer.Fetcher.PolygonEdge, only: [fill_block_range: 5, get_block_number_by_tag: 3]
+  import Indexer.Fetcher.PolygonEdge, only: [fill_block_range: 5]
 
   alias ABI.TypeDecoder
   alias Explorer.{Chain, Repo}
   alias Explorer.Chain.Log
   alias Explorer.Chain.PolygonEdge.Withdrawal
   alias Indexer.Fetcher.PolygonEdge
+  alias Indexer.Helper
 
   @fetcher_name :polygon_edge_withdrawal
 
@@ -106,7 +107,7 @@ defmodule Indexer.Fetcher.PolygonEdge.Withdrawal do
 
     if not safe_block_is_latest do
       # find and fill all events between "safe" and "latest" block (excluding "safe")
-      {:ok, latest_block} = get_block_number_by_tag("latest", json_rpc_named_arguments, 100_000_000)
+      {:ok, latest_block} = Helper.get_block_number_by_tag("latest", json_rpc_named_arguments, 100_000_000)
 
       fill_block_range(
         safe_block + 1,

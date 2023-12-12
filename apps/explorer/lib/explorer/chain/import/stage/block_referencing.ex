@@ -36,7 +36,9 @@ defmodule Explorer.Chain.Import.Stage.BlockReferencing do
           [
             Runner.Zkevm.LifecycleTransactions,
             Runner.Zkevm.TransactionBatches,
-            Runner.Zkevm.BatchTransactions
+            Runner.Zkevm.BatchTransactions,
+            Runner.Zkevm.BridgeL1Tokens,
+            Runner.Zkevm.BridgeOperations
           ]
 
       _ ->

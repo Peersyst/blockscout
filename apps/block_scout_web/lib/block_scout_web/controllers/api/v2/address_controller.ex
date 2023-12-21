@@ -497,7 +497,12 @@ defmodule BlockScoutWeb.API.V2.AddressController do
     end
   end
 
-  defp validate_address(address_hash_string, params, options \\ @api_true) do
+  @spec validate_address(binary(), any(), any()) ::
+          {:format, :error}
+          | {:not_found, {:error, :not_found}}
+          | {:restricted_access, true}
+          | {:ok, Explorer.Chain.Hash.t(), Explorer.Chain.Address.t()}
+  def validate_address(address_hash_string, params, options \\ @api_true) do
     with {:format, {:ok, address_hash}} <- {:format, Chain.string_to_address_hash(address_hash_string)},
          {:ok, false} <- AccessHelper.restricted_access?(address_hash_string, params),
          {:not_found, {:ok, address}} <- {:not_found, Chain.hash_to_address(address_hash, options, false)} do

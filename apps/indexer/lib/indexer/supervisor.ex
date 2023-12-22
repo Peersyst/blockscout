@@ -135,9 +135,9 @@ defmodule Indexer.Supervisor do
          [[memory_monitor: memory_monitor, json_rpc_named_arguments: json_rpc_named_arguments]]},
         {Indexer.Fetcher.PolygonEdge.WithdrawalExit.Supervisor, [[memory_monitor: memory_monitor]]},
         configure(Indexer.Fetcher.Zkevm.BridgeL1.Supervisor, [[memory_monitor: memory_monitor]]),
-        # configure(Indexer.Fetcher.Zkevm.BridgeL2.Supervisor, [
-        #   [json_rpc_named_arguments: json_rpc_named_arguments, memory_monitor: memory_monitor]
-        # ]),
+        configure(Indexer.Fetcher.Zkevm.BridgeL2.Supervisor, [
+          [json_rpc_named_arguments: json_rpc_named_arguments, memory_monitor: memory_monitor]
+        ]),
         configure(Indexer.Fetcher.Zkevm.TransactionBatch.Supervisor, [
           [json_rpc_named_arguments: json_rpc_named_arguments, memory_monitor: memory_monitor]
         ]),

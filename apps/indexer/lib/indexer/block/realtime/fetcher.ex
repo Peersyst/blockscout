@@ -35,6 +35,7 @@ defmodule Indexer.Block.Realtime.Fetcher do
   alias Indexer.Block.Realtime.TaskSupervisor
   alias Indexer.Fetcher.{CoinBalance, CoinBalanceDailyUpdater}
   alias Indexer.Fetcher.PolygonEdge.{DepositExecute, Withdrawal}
+  alias Indexer.Fetcher.Zkevm.BridgeL2, as: ZkevmBridgeL2
   alias Indexer.Prometheus
   alias Indexer.Transform.Addresses
   alias Timex.Duration
@@ -289,6 +290,9 @@ defmodule Indexer.Block.Realtime.Fetcher do
           # we need to remove all rows from `polygon_edge_withdrawals` and `polygon_edge_deposit_executes` tables previously written starting from reorg block number
           remove_polygon_edge_assets_by_number(block_number_to_fetch)
 
+          # we need to remove all rows from `zkevm_bridge` table previously written starting from reorg block number
+          remove_polygon_zkevm_assets_by_number(block_number_to_fetch)
+
           # give previous fetch attempt (for same block number) a chance to finish
           # before fetching again, to reduce block consensus mistakes
           :timer.sleep(@reorg_delay)
@@ -305,6 +309,12 @@ defmodule Indexer.Block.Realtime.Fetcher do
     if Application.get_env(:explorer, :chain_type) == "polygon_edge" do
       Withdrawal.remove(block_number_to_fetch)
       DepositExecute.remove(block_number_to_fetch)
+    end
+  end
+
+  defp remove_polygon_zkevm_assets_by_number(block_number_to_fetch) do
+    if Application.get_env(:explorer, :chain_type) == "polygon_zkevm" do
+      ZkevmBridgeL2.reorg_handle(block_number_to_fetch)
     end
   end
 

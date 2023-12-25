@@ -143,6 +143,11 @@ defmodule Indexer.Transform.Addresses do
         %{from: :block_number, to: :fetched_coin_balance_block_number},
         %{from: :address_hash, to: :hash}
       ]
+    ],
+    zkevm_bridge_operations: [
+      [
+        %{from: :l2_token_address, to: :hash}
+      ]
     ]
   }
 
@@ -444,6 +449,11 @@ defmodule Indexer.Transform.Addresses do
             %{
               required(:address_hash) => String.t(),
               required(:block_number) => non_neg_integer()
+            }
+          ],
+          optional(:zkevm_bridge_operations) => [
+            %{
+              optional(:l2_token_address) => String.t()
             }
           ]
         }) :: [params]

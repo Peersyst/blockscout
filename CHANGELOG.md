@@ -5,6 +5,7 @@
 ### Features
 
 - [#9044](https://github.com/blockscout/blockscout/pull/9044) - Expand gas price oracle functionality
+- [#9098](https://github.com/blockscout/blockscout/pull/9098) - Polygon zkEVM Bridge indexer and API v2 extension
 
 ### Fixes
 

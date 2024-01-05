@@ -23,7 +23,6 @@ defmodule Explorer.ChainTest do
     Token,
     TokenTransfer,
     Transaction,
-    SmartContract,
     Wei
   }
 

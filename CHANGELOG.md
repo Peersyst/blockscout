@@ -4,7 +4,7 @@
 
 ### Features
 
-- [#9068](https://github.com/blockscout/blockscout/pull/9068) - New RPC API endpoints
+- [#9068](https://github.com/blockscout/blockscout/pull/9068) - New RPC API v1 endpoints
 - [#9044](https://github.com/blockscout/blockscout/pull/9044) - Expand gas price oracle functionality
 
 ### Fixes

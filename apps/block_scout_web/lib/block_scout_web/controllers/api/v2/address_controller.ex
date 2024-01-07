@@ -497,6 +497,9 @@ defmodule BlockScoutWeb.API.V2.AddressController do
     end
   end
 
+  @doc """
+    Validates an address hash and returns the `{:ok, address_hash, address}` if address hash passed all the checks.
+  """
   @spec validate_address(binary(), any(), any()) ::
           {:format, :error}
           | {:not_found, {:error, :not_found}}

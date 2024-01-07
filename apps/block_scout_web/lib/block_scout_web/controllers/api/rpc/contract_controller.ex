@@ -264,7 +264,7 @@ defmodule BlockScoutWeb.API.RPC.ContractController do
       :pass ->
         render(conn, :show, %{
           result:
-            "Implementation (#{SmartContract.address_hash_to_smart_contract(submission.address_hash).implementation_address_hash}) was verified and saved for proxy (#{submission.address_hash})"
+            "Implementation (#{SmartContract.address_hash_to_smart_contract(submission.contract_address_hash).implementation_address_hash}) was verified and saved for proxy (#{submission.contract_address_hash})"
         })
 
       :fail ->
